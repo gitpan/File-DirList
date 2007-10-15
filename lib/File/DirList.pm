@@ -1,6 +1,5 @@
 package File::DirList;
 
-use 5.008004;
 use strict;
 use warnings;
 
@@ -25,7 +24,7 @@ our @EXPORT = qw(
 	
 );
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use DirHandle;
 
@@ -130,7 +129,7 @@ __END__
 
 File::DirList - provide a sorted list of directory content
 
-I<Version 0.02>
+I<Version 0.03>
 
 =head1 SYNOPSIS
 
