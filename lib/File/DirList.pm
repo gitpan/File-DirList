@@ -25,7 +25,7 @@ our @EXPORT = qw(
 	
 );
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use DirHandle;
 
@@ -79,6 +79,20 @@ my $statLink = sub
 	return $res;
 	};
 
+sub sortList($$)
+	{
+	my @sortMode = split(//, $_[1]);
+	my @result = sort {my $r = 0;
+	                   foreach my $m (@sortMode)
+	                       {
+	                       if (($r = &{$sortSubs{$m}}($a, $b)) != 0)
+	                           { last; };
+	                       };
+	                   $r; 
+	                  } @{$_[0]};
+
+	return \@result;
+	};
 
 sub list($$@)
 	{
@@ -103,17 +117,7 @@ sub list($$@)
 	
 	undef $d;
 
-	my @sortMode = split(//, $sortMode);
-	my @result = sort {my $r = 0;
-	                   foreach my $m (@sortMode)
-	                       {
-	                       if (($r = &{$sortSubs{$m}}($a, $b)) != 0)
-	                           { last; };
-	                       };
-	                   $r; 
-	                  } @list;
-
-	return \@result;
+	return sortList(\@list, $sortMode);
 	};
 
 # Preloaded methods go here.
@@ -126,7 +130,7 @@ __END__
 
 File::DirList - provide a sorted list of directory content
 
-I<Version 0.01>
+I<Version 0.02>
 
 =head1 SYNOPSIS
 
@@ -139,7 +143,13 @@ I<Version 0.01>
 This module is used to get list of directory content.
 Simple wrapper around L<DirHandle> and L<sort()>
 
-Module have a single method C<list($dirName, $sortMode, $noLinks, $hideDotFiles, $showSelf)>, which accepting 5 parameters:
+Module have a 2 methods 
+
+=over 4
+
+=item C<list($dirName, $sortMode, $noLinks, $hideDotFiles, $showSelf)>
+
+Producind a list, accepting 5 parameters:
 
 =over 4
 
@@ -235,6 +245,29 @@ Link target. C<I<undef>> for non-links, target path for links.
 =back
 
 L<[15]> and L<[16]> are set to non-link if L<$examineLinks> is C<false>.
+
+=item C<sortList($list, $sortMode)>
+
+Used to re-sort a list produced by C<list()>
+
+Parameters are
+
+=over 4
+
+=item C<$lis>
+
+Reference to a list produced by C<list()>
+
+=item C<$sortMode>
+
+Sorting rules.
+
+=back
+
+Returning value is similar to C<list()>
+
+
+=back
 
 =head2 EXPORT
 
