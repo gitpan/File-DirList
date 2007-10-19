@@ -1,10 +1,11 @@
 # http://module-build.sourceforge.net/META-spec.html
 #XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
 name:         File-DirList
-version:      0.03
+version:      0.04
 version_from: lib/File/DirList.pm
 installdirs:  site
 requires:
+    Cwd:                           0
     DirHandle:                     0
 
 distribution_type: module

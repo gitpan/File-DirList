@@ -1,5 +1,8 @@
 Revision history for Perl extension File::DirList.
 
+0.04  Sat Oct 20 00:20:00 2007
+	- Bugfix: relative symlinks were not recognized correctly
+
 0.03  Sat Oct 15 23:00:00 2007
 	- perl requirement fixed. We do not need 5.8, 5.5 is enough
 

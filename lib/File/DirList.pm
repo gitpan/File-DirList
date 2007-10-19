@@ -24,9 +24,10 @@ our @EXPORT = qw(
 	
 );
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use DirHandle;
+use Cwd;
 
 my %sortSubs = ();
 
@@ -104,6 +105,9 @@ sub list($$@)
 	if (!defined($d))
 		{ return undef; };
 
+	my $cwd = getcwd;
+	chdir($dirName);
+
 	my $statSub = $noLinks ? $statFile : $statLink;
 
 	while (defined(my $entry = $d->read()))
@@ -115,6 +119,8 @@ sub list($$@)
 		};
 	
 	undef $d;
+
+	chdir($cwd);
 
 	return sortList(\@list, $sortMode);
 	};
@@ -129,7 +135,7 @@ __END__
 
 File::DirList - provide a sorted list of directory content
 
-I<Version 0.03>
+I<Version 0.04>
 
 =head1 SYNOPSIS
 
