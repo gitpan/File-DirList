@@ -24,7 +24,7 @@ our @EXPORT = qw(
 	
 );
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 use DirHandle;
 use Cwd;
@@ -129,7 +129,6 @@ sub list($$@)
 
 1;
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
@@ -145,16 +144,16 @@ I<Version 0.04>
 
 =head1 DESCRIPTION
 
-This module is used to get list of directory content.
-Simple wrapper around L<DirHandle> and L<sort()>
+This module is used to get a list of directory content.
+It is a simple wrapper around L<DirHandle> and L<sort()>
 
-Module have a 2 methods 
+The module has two methods:
 
 =over 4
 
 =item C<list($dirName, $sortMode, $noLinks, $hideDotFiles, $showSelf)>
 
-Producind a list, accepting 5 parameters:
+Produces a list, accepting 5 parameters:
 
 =over 4
 
@@ -166,47 +165,47 @@ Name of the directory to list
 
 Describes how list should be sorted.
 
-This is a string contains the following symbols
+This is a string containing the following symbols, with uppercase representing the reverse sort:
 
 =over 4
 
 =item C<d> or C<D>
 
-"Directory" sort. C<'d'> means all the directories will precede files, C<'D'> means revese.
+"Directory" sort. C<'d'> means all the directories will precede files, C<'D'> means reverse.
 
 =item C<n> or C<N>
 
-Sort by file (or subdir) name. C<'n'> means strate, C<'N'> means revese
+Sort by file (or subdirectory) name.
 
 =item C<i> or C<I>
 
-Same as C<'n'> but case insesitive
+Same as C<'n'> but case insensitive.
 
 =item C<m> or C<M>
 
-Sort by modification time, strate or revese
+Sort by modification time.
 
 =item C<c> or C<C>
 
-Sort by creation time, strate or revese
+Sort by creation time.
 
 =item C<a> or C<A>
 
-Sort by access time, strate or revese
+Sort by access time.
 
 =item C<s> or C<S>
 
-Sort by access time, strate or revese
+Sort by size.
 
 =back
 
-L<$sortMode> is interpreted from left to right. In case first comparation produce equal result
-next one is used. For example, string C<I<'din'>> produce a list with all the directories preceding files,
-directories and files are sorted by name case insensitive, but low case letter preceeding upper case.
+L<$sortMode> is interpreted from left to right. If the first comparison produces an equal result
+next one is used. For example, string C<I<'din'>> produces a list with all the directories preceding files,
+directories and files are sorted by name case insensitively, with lowercase letters preceding upper case.
 
 =item C<$noLinks>
 
-If C<true> symbolic links will not be examined. Set it on the platforms without symlink support.
+If C<true> symbolic links will not be examined. Set it on platforms without symlink support.
 
 =item C<$hideDotFiles>
 
@@ -218,17 +217,17 @@ If C<true> I<'.'> directory entry will be reported.
 
 =back
 
-Returned value is a refference for array sorted as described by L<$sortMode>.
+Returned value is an array reference, sorted as described by L<$sortMode>.
 
-Array elemnts are refferences to another arrays representing an item.
+Array elements are array references representing an item.
 
-Item array contains 17 elements:
+The individual item's array contains 17 elements:
 
 =over 4
 
 =item C<[0..12]>
 
-Result of L<stat()> for this item. For valid symbolik links L<stat> of the target item is returned.
+Result of L<stat()> for this item. For valid symbolic links, the L<stat> of the target item is returned.
 
 =item C<[13]>
 
@@ -269,8 +268,7 @@ Sorting rules.
 
 =back
 
-Returning value is similar to C<list()>
-
+Return value is similar to C<list()>
 
 =back
 
@@ -278,12 +276,9 @@ Returning value is similar to C<list()>
 
 None by default
 
-
-
 =head1 SEE ALSO
 
 L<DirHandle>, L<stat>, L<lstat>, L<sort>
-
 
 =head1 AUTHOR
 
@@ -296,6 +291,5 @@ Copyright (C) 2006 by Daniel Podolsky, E<lt>tpaba@cpan.orgE<gt>
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.4 or,
 at your option, any later version of Perl 5 you may have available.
-
 
 =cut

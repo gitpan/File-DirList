@@ -1,5 +1,8 @@
 Revision history for Perl extension File::DirList.
 
+0.05  Mon Nov 05 10:45:00 2007
+	- Documentation fix: thanks to Pi <pi@pihost.us>
+
 0.04  Sat Oct 20 00:20:00 2007
 	- Bugfix: relative symlinks were not recognized correctly
 

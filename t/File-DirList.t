@@ -14,7 +14,7 @@ BEGIN { use_ok('File::DirList') };
 # its man page ( perldoc Test::More ) for help writing this test script.
 
 my $homeDir = ( "\L$^O" =~ m/win32/ ) ? '.' : glob('~');
-print STDERR ("\nListing your home dir '$homeDir' for test porposes\n");
+print STDERR ("\nListing your home dir '$homeDir' for test purposes\n");
 foreach my $item (@{File::DirList::list($homeDir, 'din', "\L$^O" =~ m/win32/ ? 1 : 0, 1, 1)})
 	{ print STDERR (sprintf("%s'%s'%s\n", ($item->[14] ? 'dir  ' : 'file '), $item->[13], (!$item->[15] ? '' : ($item->[15] < 0 ? ' bad' : '').' link to \''.$item->[16].'\''))); };
 ok("listing completed");
